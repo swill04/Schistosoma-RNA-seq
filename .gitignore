@@ -47,3 +47,17 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# Files produced from analysis
+alignment_mira/*
+counting_mira/*
+fastq_sm_mira/*
+genome/*
+multiqc_data/*
+plots/*
+qc/*
+qualimap/*
+reports/*
+trimmed_mira/*
+multiqc_report.html
+star_stats.txt
