@@ -1,0 +1,6 @@
+Fig 1 - Introductory Figure (show what the intro is talking about), look at winners v losers paper for help in intro
+Fig 2 - Methods Schematic (flow chart of workflow created to do analysis), W writes methods for rna extraction and sequencing. I write analysis methods (STAR to map reads, featureCounts, Picard Tools for duplicates, etc.)
+Fig 3 - Two figures - 1 is PCA and 1 is Volcano. Already finished (just need to write caption)
+Fig 4 - Plots of selected DEGs (example in analysis_2 ctd.)
+Fig 5 - 
+Fig 6 - 
