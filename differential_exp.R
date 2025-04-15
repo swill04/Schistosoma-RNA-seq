@@ -81,7 +81,16 @@ volcano_plot <- volcano_data |>
     geom_point() +
     geom_hline(yintercept = -log10(0.05)) +
     geom_vline(xintercept = 1) +
-    geom_vline(xintercept = -1)
+    geom_vline(xintercept = -1) +
+    labs(
+        x = 'log2FoldChange',
+        y = '-log10(padj)'
+    )
+  
+volcano_plot <- volcano_plot + theme_minimal() + theme(
+        axis.title.x = element_text(size = 20),
+        axis.title.y = element_text(size = 20)
+    )
 
 ggsave("plots/volcano.png", volcano_plot)
 # caption on plot: All points are located on the bottom of the plot indicating genes that aren't significantlly differentially expressed.
@@ -94,5 +103,6 @@ post_deseq2 <- plotPCA(vsd, intgroup = c("tissue"))
 ggsave("plots/post_deseq2.png")
 # caption on plot: After performing deseq2 analysis, there is now separation of the points. 
 # caption ct'd: There are pretty clear clusters of a few points, with only a few being slightly removed from the others
+
 
 
