@@ -2,19 +2,21 @@ library(tidyverse)
 library(DESeq2)
 library(broom)
 
-star_counts_df <- read_tsv("counting_mira/star_counts.tsv", comment = "#") |>
+star_counts_df <- read_tsv("/data/classes/2025/spring/biol443/course_files/rnaseq_data/counts.tsv", comment = "#") |>
              mutate(across(where(is.numeric), as.integer))
 
 star_counts_summary <- star_counts_df |>
-    select(Geneid, contains('star.bam')) |>
-    rename_with(~str_remove(., "counting/dedup/star.bam:"), everything()) |>
+    select(Geneid, contains('dedup/star')) |>
+    rename_with(~str_remove(., "dedup/star/"), everything()) |>
+    rename_with(~str_remove(., "_S[0-9]{2}_L005.bam:.*"), everything()) |>
     rowwise() |>
     mutate(total_counts = sum(c_across(where(is.numeric)), na.rm = T)) |>
     filter(total_counts >= 10)
 
 star_sample_summary <- star_counts_df |>
-    select(Geneid, contains('star.bam')) |>
-    rename_with(~str_remove(., "counting/dedup/star.bam:"), everything()) |>
+    select(Geneid, contains('dedup/star')) |>
+    rename_with(~str_remove(., "dedup/star/"), everything()) |>
+    rename_with(~str_remove(., "_S[0-9]{2}_L005.bam:.*"), everything()) |>
     pivot_longer(-Geneid, names_to = 'sample', values_to = 'count') |>
     filter(count > 0) |>
     group_by(Geneid) |>
@@ -57,8 +59,8 @@ star_pca_fit |>
     geom_point(size = 5)
 
 star_metadata <- data.frame(sample_id = colnames(star_counts_m)) |>
-    mutate(tissue = str_sub(sample_id, 30, 32),
-           rep = str_sub(sample_id, 35))
+    mutate(tissue = str_sub(sample_id, 1, 3),
+           rep = str_sub(sample_id, 6))
 rownames(star_metadata) <- star_metadata$sample_id
 star_metadata <- select(star_metadata, -sample_id)
 star_metadata
