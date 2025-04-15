@@ -78,8 +78,8 @@ volcano_plot <- volcano_data |>
     ggplot(aes(x = log2FoldChange, y = -log10(padj))) +
     geom_point() +
     geom_hline(yintercept = -log10(0.05)) +
-    geom_vline(xintercept = 2) +
-    geom_vline(xintercept = -2)
+    geom_vline(xintercept = 1) +
+    geom_vline(xintercept = -1)
 
 ggsave("plots/volcano.png", volcano_plot)
 # caption on plot: All points are located on the bottom of the plot indicating genes that aren't significantlly differentially expressed.
