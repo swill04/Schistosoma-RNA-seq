@@ -101,6 +101,7 @@ volcano_plot <- volcano_data |>
         )
 volcano_plot
 
+ggsave('plots/volcano.png', volcano_plot, width = 16, height = 10)
 ggsave("plots/volcano.pdf", volcano_plot, width = 16, height = 10)
 # caption on plot: All points are located on the bottom of the plot indicating genes that aren't significantlly differentially expressed.
 # caption ct'd: There are points that are located on the right/left - this indicates higher expression of that gene in the intestine vs liver.
@@ -128,6 +129,7 @@ post_deseq2 <- plotPCA(vsd, intgroup = c("tissue"), returnData = TRUE) |>
         )
 post_deseq2
 
+ggsave('plots/post_deseq2.png', width = 16, height = 11)
 ggsave("plots/post_deseq2.pdf", width = 16, height = 11)
 # caption on plot: After performing deseq2 analysis, there is now separation of the points. 
 # caption ct'd: There are pretty clear clusters of a few points, with only a few being slightly removed from the others
@@ -168,4 +170,6 @@ DEG_plot <- selected_genes |>
 )
 
 DEG_plot
-ggsave('plots/DEGs_plot.pdf', DEG_plot, width = 13, height = 9)
+
+ggsave('plots/DEGs_plot.png', DEG_plot, width = 13, height = 9, bg = "white")
+ggsave('plots/DEGs_plot.pdf', DEG_plot, width = 13, height = 9, bg = "white")
