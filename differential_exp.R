@@ -83,8 +83,7 @@ volcano_plot <- volcano_data |>
         TRUE ~ 'not deg'
     )) |> 
     ggplot(aes(x = log2FoldChange, y = -log10(padj))) +
-    geom_point(aes(color = color),
-        size = 5) +
+    geom_point(aes(color = color)) +
     geom_label_repel(data = degs,
                      aes(x = log2FoldChange, y = -log10(padj), label = gene_id),
                      max.overlaps = 50, size = 1) +
@@ -100,9 +99,11 @@ ggsave("plots/volcano.pdf", volcano_plot, bg = 'white', width = 6, height = 6)
 # caption on plot: All points are located on the bottom of the plot indicating genes that aren't significantlly differentially expressed.
 # caption ct'd: There are points that are located on the right/left - this indicates higher expression of that gene in the intestine vs liver.
 
+write_csv(volcano_data, '/data/users/willetse0745/Schistosoma-RNA-seq/pipeline/deseq_results/deseq_results.csv')
+
 norm_counts <- counts(dds, normalized = TRUE) |>
     as_tibble(rownames = 'gene_id')
-write_csv(norm_counts, '/data/users/willetse0745/Sm_Mira_IvT/pipeline/deseq_results/deseq_norm_counts.csv')
+write_csv(norm_counts, '/data/users/willetse0745/Schistosoma-RNA-seq/pipeline/deseq_results/deseq_norm_counts.csv')
 
 
 
